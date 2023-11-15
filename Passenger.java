@@ -1,34 +1,43 @@
+/*
+ * Create Passenger class which will store information about an individual passenger
+ */
 public class Passenger {
     /*
-     * Attributes
+     * a private attribute to indicate passenger name
      */
     private String name;
 
     /*
      * constructor
+     * @param name  passenger name
     */
     public Passenger(String name) {
         this.name = name;
     }
 
     /*
-     * methods
+     * a method that can call `c.addPassenger(this)` to board a given `Car`
+     * @param c
+     * @catch the RuntimeException that will be thrown by `c.addPassenger(...)` in the event that the car is full
      */
     public void boardCar(Car c) {
-        int seatsR = c.seatsRemaining();
-        if (seatsR > 0) {
+        try {
             c.addPassenger(this);
-        }
-        else {
+        } catch (Exception e) {
             throw new RuntimeException("Car in full capacity");
-        }  
+        }
     }
 
+    /*
+     * a method that can call `c.removePassenger(this)` to get off a given `Car`
+     * @param c
+     * @catch the RuntimeException that will be thrown by `c.removePassenger(...)` in the event that the `Passenger` wasn't actually onboard
+     */   
     public void getOffCar(Car c) {
-        if (c.containsPassenger(this)) {
+        try {
             c.removePassenger(this);
         } 
-        else{
+        catch (Exception e){
             throw new RuntimeException("Passenger not onboard");
         }
     }

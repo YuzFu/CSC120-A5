@@ -1,15 +1,22 @@
 import java.util.ArrayList;
 
+/*
+ * create Train class which will tie them all together
+ */
 public class Train {
     /*
-     * Attributes
+     * a private attribute which we will mark with the keyword `final` to establish the composition relationship
      */
     private final Engine engine;
+    /*
+     * a private to keep track of the `Car`s currently attached
+     */
     private ArrayList<Car> cars;
 
     /*
-     * constructor
-    */
+     * a constructor which will initialize the `Engine` and `Car`s and store them
+     * @param fuel type, fuel capacity, number of cars, passenger capacity
+     */
     public Train(FuelType fuelType, double fuelCapacity, int nCars, int passengerCapacity) {
         engine = new Engine(fuelType, passengerCapacity);
         cars = new ArrayList<Car>();
@@ -19,16 +26,25 @@ public class Train {
     }
 
     /*
-     * methods
+     * an accessor to return engine
+     * @return engine
      */
     public Engine getEngine() {
         return engine;
     }
 
+    /*
+     * an accessor ro return the `i`th car
+     * @return i th car
+     */
     public Car getCar(int i) {
         return cars.get(i);
     }
 
+    /*
+     * an accessor which will return the maximum total capacity across all `Car`s
+     * @return totalMaxCapacity
+     */
     public int getMaxCapacity() {
         int totalMaxCapacity = 0;
         for (Car car : cars) {
@@ -36,6 +52,11 @@ public class Train {
         }
         return totalMaxCapacity;
     }
+
+    /*
+     * an accessor which will return the number of remaining open seats across all `Car`s
+     * @return totalSeatsRemained
+     */    
     public int seatsRemaining() {
             int totalSeatsRemained = 0;
         for (Car car : cars) {
@@ -44,6 +65,10 @@ public class Train {
         return totalSeatsRemained;
     }
 
+    /*
+     * a method that prints a roster of all `Passenger`s onboard
+     * @return a roster of all `Passenger`s onboard or a message of "This train is EMPTY."
+     */
     public void printManifest() {
         int seatsOccupied = 0;
         for (Car car : cars) {
